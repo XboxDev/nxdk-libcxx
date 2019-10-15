@@ -10,6 +10,12 @@
 #ifndef _LIBCPP_SUPPORT_WIN32_LOCALE_WIN32_H
 #define _LIBCPP_SUPPORT_WIN32_LOCALE_WIN32_H
 
+
+#if defined(NXDK)
+#include <support/xlocale/__nop_locale_mgmt.h>
+#include <support/xlocale/__posix_l_fallback.h>
+#include <support/xlocale/__strtonum_fallback.h>
+#else
 #include <__config>
 #include <stdio.h>
 #include <xlocinfo.h> // _locale_t
@@ -194,5 +200,7 @@ inline int iswblank_l( wint_t c, locale_t /*loc*/ )
 {
     return ( c == L' ' || c == L'\t' );
 }
+
+#endif // NXDK
 
 #endif // _LIBCPP_SUPPORT_WIN32_LOCALE_WIN32_H

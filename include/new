@@ -95,7 +95,7 @@ void  operator delete[](void* ptr, void*) noexcept;
 #include <cstdlib>
 #endif
 
-#if defined(_LIBCPP_ABI_VCRUNTIME)
+#if defined(_LIBCPP_ABI_VCRUNTIME) && !defined(NXDK)
 #include <new.h>
 #endif
 
@@ -125,10 +125,11 @@ void  operator delete[](void* ptr, void*) noexcept;
 namespace std  // purposefully not using versioning namespace
 {
 
-#if !defined(_LIBCPP_ABI_VCRUNTIME)
+#if !defined(_LIBCPP_ABI_VCRUNTIME) || defined(NXDK)
 struct _LIBCPP_TYPE_VIS nothrow_t { explicit nothrow_t() = default; };
 extern _LIBCPP_FUNC_VIS const nothrow_t nothrow;
 
+#ifndef NXDK
 class _LIBCPP_EXCEPTION_ABI bad_alloc
     : public exception
 {
@@ -146,6 +147,7 @@ public:
     virtual ~bad_array_new_length() _NOEXCEPT;
     virtual const char* what() const _NOEXCEPT;
 };
+#endif
 
 typedef void (*new_handler)();
 _LIBCPP_FUNC_VIS new_handler set_new_handler(new_handler) _NOEXCEPT;
@@ -181,7 +183,7 @@ _LIBCPP_INLINE_VAR constexpr destroying_delete_t destroying_delete{};
 #define _THROW_BAD_ALLOC
 #endif
 
-#if !defined(_LIBCPP_ABI_VCRUNTIME)
+#if !defined(_LIBCPP_ABI_VCRUNTIME) || defined(NXDK)
 
 _LIBCPP_NODISCARD_AFTER_CXX17 _LIBCPP_OVERRIDABLE_FUNC_VIS void* operator new(std::size_t __sz) _THROW_BAD_ALLOC;
 _LIBCPP_NODISCARD_AFTER_CXX17 _LIBCPP_OVERRIDABLE_FUNC_VIS void* operator new(std::size_t __sz, const std::nothrow_t&) _NOEXCEPT _LIBCPP_NOALIAS;

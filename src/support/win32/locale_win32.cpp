@@ -24,7 +24,7 @@ locale_t newlocale( int mask, const char * locale, locale_t /*base*/ )
 
 decltype(MB_CUR_MAX) MB_CUR_MAX_L( locale_t __l )
 {
-#if defined(_LIBCPP_MSVCRT)
+#if defined(_LIBCPP_MSVCRT) && !defined(NXDK)
   return ___mb_cur_max_l_func(__l);
 #else
   __libcpp_locale_guard __current(__l);
@@ -89,7 +89,7 @@ int snprintf_l(char *ret, size_t n, locale_t loc, const char *format, ...)
 {
     va_list ap;
     va_start( ap, format );
-#if defined(_LIBCPP_MSVCRT)
+#if defined(_LIBCPP_MSVCRT) && !defined(NXDK)
     // FIXME: Remove usage of internal CRT function and globals.
     int result = __stdio_common_vsprintf(
         _CRT_INTERNAL_LOCAL_PRINTF_OPTIONS | _CRT_INTERNAL_PRINTF_STANDARD_SNPRINTF_BEHAVIOR,

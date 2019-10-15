@@ -12,7 +12,7 @@
 #include "include/atomic_support.h"
 
 #if defined(_LIBCPP_ABI_MICROSOFT)
-#   if !defined(_LIBCPP_ABI_VCRUNTIME)
+#   if !defined(_LIBCPP_ABI_VCRUNTIME) || defined(NXDK)
 #       include "support/runtime/new_handler_fallback.ipp"
 #   endif
 #elif defined(LIBCXX_BUILDING_LIBCXXABI)
@@ -51,7 +51,7 @@ __throw_bad_alloc()
 
 #if !defined(__GLIBCXX__) &&                                                   \
     !defined(_LIBCPP_ABI_VCRUNTIME) &&      \
-    !defined(_LIBCPP_DISABLE_NEW_DELETE_DEFINITIONS)
+    !defined(_LIBCPP_DISABLE_NEW_DELETE_DEFINITIONS) || defined(NXDK)
 
 // Implement all new and delete operators as weak definitions
 // in this shared library, so that they can be overridden by programs

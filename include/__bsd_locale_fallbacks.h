@@ -21,6 +21,10 @@
 #pragma GCC system_header
 #endif
 
+#ifdef NXDK
+int __libcpp_vasprintf(char **sptr, const char *__restrict fmt, va_list ap);
+#endif
+
 _LIBCPP_BEGIN_NAMESPACE_STD
 
 inline _LIBCPP_INLINE_VISIBILITY
@@ -119,7 +123,11 @@ int __libcpp_asprintf_l(char **__s, locale_t __l, const char *__format, ...) {
     va_list __va;
     va_start(__va, __format);
     __libcpp_locale_guard __current(__l);
+    #ifdef NXDK
+    int __res = __libcpp_vasprintf(__s, __format, __va);
+    #else
     int __res = vasprintf(__s, __format, __va);
+    #endif
     va_end(__va);
     return __res;
 }

@@ -1,0 +1,15 @@
+LIBCXX_DIR = $(NXDK_DIR)/lib/libcxx
+LIBCXX_SRCS += $(LIBCXX_DIR)/src/*.cpp
+LIBCXX_SRCS += $(LIBCXX_DIR)/src/support/win32/support.cpp
+LIBCXX_OBJS = $(addsuffix .obj, $(basename $(LIBCXX_SRCS)))
+
+$(NXDK_DIR)/lib/libc++.lib: $(LIBCXX_OBJS)
+
+main.exe: $(NXDK_DIR)/lib/libc++.lib
+
+CLEANRULES += clean-libcxx
+
+.PHONY: clean-libcxx
+clean-libcxx:
+	$(VE)rm -f $(LIBCXX_OBJS) \
+	           $(NXDK_DIR)/lib/libc++.lib

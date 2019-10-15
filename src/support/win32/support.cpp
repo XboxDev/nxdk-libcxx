@@ -13,6 +13,7 @@
 #include <cstdio>  // vsprintf, vsnprintf
 #include <cstring> // strcpy, wcsncpy
 #include <cwchar>  // mbstate_t
+#include <cerrno>  // errno, errno_t
 
 
 // Like sprintf, but when return value >= 0 it returns
