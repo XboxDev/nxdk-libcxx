@@ -117,6 +117,7 @@ using ::size_t;
 using ::tm;
 using ::wint_t;
 using ::FILE;
+#ifndef NXDK
 using ::fwprintf;
 using ::fwscanf;
 using ::swprintf;
@@ -133,12 +134,15 @@ using ::fwide;
 using ::getwc;
 using ::putwc;
 using ::ungetwc;
+#endif // NXDK
 using ::wcstod;
 using ::wcstof;
 using ::wcstold;
 using ::wcstol;
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
+#ifndef NXDK
 using ::wcstoll;
+#endif // NXDK
 #endif // _LIBCPP_HAS_NO_LONG_LONG
 using ::wcstoul;
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
@@ -165,7 +169,9 @@ using ::wmemcmp;
 using ::wmemcpy;
 using ::wmemmove;
 using ::wmemset;
+#ifndef NXDK
 using ::wcsftime;
+#endif // NXDK
 using ::btowc;
 using ::wctob;
 using ::mbsinit;
@@ -173,7 +179,9 @@ using ::mbrlen;
 using ::mbrtowc;
 using ::wcrtomb;
 using ::mbsrtowcs;
+#ifndef NXDK
 using ::wcsrtombs;
+#endif
 
 #ifndef _LIBCPP_HAS_NO_STDIN
 using ::getwchar;
