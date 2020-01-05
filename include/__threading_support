@@ -84,7 +84,10 @@ typedef pthread_key_t __libcpp_tls_key;
 typedef void* __libcpp_mutex_t;
 #define _LIBCPP_MUTEX_INITIALIZER 0
 
-#if defined(_M_IX86) || defined(__i386__) || defined(_M_ARM) || defined(__arm__)
+#if defined(NXDK)
+// Size of CRITICAL_SECTION is different in nxdk
+typedef void* __libcpp_recursive_mutex_t[7];
+#elif defined(_M_IX86) || defined(__i386__) || defined(_M_ARM) || defined(__arm__)
 typedef void* __libcpp_recursive_mutex_t[6];
 #elif defined(_M_AMD64) || defined(__x86_64__) || defined(_M_ARM64) || defined(__aarch64__)
 typedef void* __libcpp_recursive_mutex_t[5];
@@ -93,8 +96,16 @@ typedef void* __libcpp_recursive_mutex_t[5];
 #endif
 
 // Condition Variable
+#if defined(NXDK)
+// Size and content of CONDITION_VARIABLE are different in nxdk
+static_assert(sizeof(int) == sizeof(void*));
+typedef int __libcpp_condvar_t[4];
+// Set it to INIT_ONCE_STATIC_INIT, INVALID_HANDLE_VALUE, INVALID_HANDLE_VALUE, 0 (same as CONDITION_VARIABLE_INIT)
+#define _LIBCPP_CONDVAR_INITIALIZER {0, -1, -1, 0}
+#else
 typedef void* __libcpp_condvar_t;
 #define _LIBCPP_CONDVAR_INITIALIZER 0
+#endif
 
 // Execute Once
 typedef void* __libcpp_exec_once_flag;
