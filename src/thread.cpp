@@ -14,7 +14,9 @@
 #include "vector"
 #include "future"
 #include "limits"
+#ifndef NXDK
 #include <sys/types.h>
+#endif
 
 #if defined(__unix__) || (defined(__APPLE__) && defined(__MACH__))
 # include <sys/param.h>

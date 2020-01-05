@@ -34,6 +34,7 @@ LIBCXX_SRCS += $(LIBCXX_DIR)/src/valarray.cpp
 LIBCXX_SRCS += $(LIBCXX_DIR)/src/variant.cpp
 LIBCXX_SRCS += $(LIBCXX_DIR)/src/vector.cpp
 LIBCXX_SRCS += $(LIBCXX_DIR)/src/support/win32/support.cpp
+LIBCXX_SRCS += $(LIBCXX_DIR)/src/support/win32/thread_win32.cpp
 LIBCXX_OBJS = $(addsuffix .obj, $(basename $(LIBCXX_SRCS)))
 
 $(NXDK_DIR)/lib/libc++.lib: $(LIBCXX_OBJS)
