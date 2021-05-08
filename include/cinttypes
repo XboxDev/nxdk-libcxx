@@ -249,8 +249,10 @@ using::imaxabs;
 using::imaxdiv;
 using::strtoimax;
 using::strtoumax;
+#ifndef NXDK
 using::wcstoimax;
 using::wcstoumax;
+#endif // NXDK
 
 _LIBCPP_END_NAMESPACE_STD
 
