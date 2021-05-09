@@ -190,9 +190,11 @@ using ::wscanf;
 #endif
 
 #ifndef _LIBCPP_HAS_NO_STDOUT
+#ifndef NXDK
 using ::putwchar;
 using ::vwprintf;
 using ::wprintf;
+#endif // NXDK
 #endif
 
 _LIBCPP_END_NAMESPACE_STD
